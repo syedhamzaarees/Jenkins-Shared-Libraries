@@ -4,7 +4,7 @@ def call(Map config = [:]) {
         echo "Step 4: Pushing ${config.imageName ?: 'flask-app:latest'} to Docker Hub..."
 
         withCredentials([usernamePassword(
-            credentialsId: config.credentialsId ?: 'dockerHubCreds',
+            credentialsId: config.credentialsId ?: 'Token',
             usernameVariable: 'dockerHubUser',
             passwordVariable: 'dockerHubPass'
         )]) {
@@ -12,8 +12,8 @@ def call(Map config = [:]) {
                 echo $dockerHubPass | docker login -u $dockerHubUser --password-stdin
             '''
             sh """
-                docker image tag ${config.localImage ?: 'flask-app:latest'} $dockerHubUser/${config.repoName ?: 'flask-app'}:${config.tag ?: 'latest'}
-                docker push $dockerHubUser/${config.repoName ?: 'flask-app'}:${config.tag ?: 'latest'}
+                docker image tag ${config.localImage ?: 'flask-app:latest'} $dockerHubUser/${config.repoName ?: 'janazauthao'}:${config.tag ?: 'jaldi'}
+                docker push $dockerHubUser/${config.repoName ?: 'janazauthao'}:${config.tag ?: 'jaldi'}
             """
         }
 
